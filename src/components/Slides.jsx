@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -8,30 +8,34 @@ import berry from "../img/berri.png";
 import "../style.css";
 
 export default function Slides() {
-  const [isAnime, setIsAnime] = useState(annoyingData);
+  const [randomData, setRandomData] = useState(null);
+  const swiperRef = useRef(null);
+
+  useEffect(() => {
+    if (randomData) {
+      swiperRef.current.swiper.slideTo(randomData.id - 1);
+    }
+  }, [randomData]);
 
   function surprise() {
-    const randomIndex = Math.floor(Math.random() * isAnime.length);
+    const randomIndex = Math.floor(Math.random() * annoyingData.length);
 
-    const randomAnime = isAnime[randomIndex];
+    const randomAnime = annoyingData[randomIndex];
 
-    setIsAnime((prevIsAnime) => {
-      const newId = prevIsAnime.length + 1;
-      const newAnime = { ...randomAnime, id: newId };
-      return [...prevIsAnime, newAnime];
-    });
+    setRandomData(randomAnime);
   }
 
   return (
     <div className="anime">
       <Swiper
+        ref={swiperRef}
         slidesPerView={1}
         spaceBetween={30}
         loop={true}
         navigation={true}
         modules={[Navigation]}
         className="mySwiper">
-        {isAnime.map((item) => {
+        {annoyingData.map((item) => {
           const { id, img, name, affiliation, bounty, devilFruit, bio } = item;
           return (
             <SwiperSlide key={id}>
@@ -72,15 +76,3 @@ export default function Slides() {
     </div>
   );
 }
-
-
-// function surprise() {
-  //   const randomAnime = isAnime[Math.floor(Math.random() * isAnime.length)];
-  //   console.log(isAnime);
-  //   console.log(randomAnime);
-
-  //   // const isDuplicate = isAnime.some((item) => item.id === randomAnime.id);
-  //   // setIsAnime(!isDuplicate ? [...isAnime, randomAnime] : [...isAnime])
-
-  //   setIsAnime([...isAnime, randomAnime]);
-  // }
