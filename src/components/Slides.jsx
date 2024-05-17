@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -8,21 +8,10 @@ import berry from "../img/berri.png";
 import "../style.css";
 
 export default function Slides() {
-  const [randomData, setRandomData] = useState(null);
   const swiperRef = useRef(null);
 
-  useEffect(() => {
-    if (randomData) {
-      swiperRef.current.swiper.slideTo(randomData.id - 1);
-    }
-  }, [randomData]);
-
   function surprise() {
-    const randomIndex = Math.floor(Math.random() * annoyingData.length);
-
-    const randomAnime = annoyingData[randomIndex];
-
-    setRandomData(randomAnime);
+    const randomAnime = Math.floor(Math.random() * annoyingData.length);
   }
 
   return (
