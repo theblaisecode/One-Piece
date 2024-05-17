@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -8,30 +8,25 @@ import berry from "../img/berri.png";
 import "../style.css";
 
 export default function Slides() {
-  const [isAnime, setIsAnime] = useState(annoyingData);
+  const [allData, setAllData] = useState(annoyingData);
+  const swiperRef = useRef(null);
 
   function surprise() {
-    const randomIndex = Math.floor(Math.random() * isAnime.length);
-
-    const randomAnime = isAnime[randomIndex];
-
-    setIsAnime((prevIsAnime) => {
-      const newId = prevIsAnime.length + 1;
-      const newAnime = { ...randomAnime, id: newId };
-      return [...prevIsAnime, newAnime];
-    });
+    const randomAnime = Math.floor(Math.random() * allData.length);
+    swiperRef.current.swiper.slideTo(randomAnime);
   }
 
   return (
     <div className="anime">
       <Swiper
+        ref={swiperRef}
         slidesPerView={1}
         spaceBetween={30}
         loop={true}
         navigation={true}
         modules={[Navigation]}
         className="mySwiper">
-        {isAnime.map((item) => {
+        {allData.map((item) => {
           const { id, img, name, affiliation, bounty, devilFruit, bio } = item;
           return (
             <SwiperSlide key={id}>
@@ -73,14 +68,13 @@ export default function Slides() {
   );
 }
 
-
 // function surprise() {
-  //   const randomAnime = isAnime[Math.floor(Math.random() * isAnime.length)];
-  //   console.log(isAnime);
-  //   console.log(randomAnime);
+//   const randomAnime = isAnime[Math.floor(Math.random() * isAnime.length)];
+//   console.log(isAnime);
+//   console.log(randomAnime);
 
-  //   // const isDuplicate = isAnime.some((item) => item.id === randomAnime.id);
-  //   // setIsAnime(!isDuplicate ? [...isAnime, randomAnime] : [...isAnime])
+//   // const isDuplicate = isAnime.some((item) => item.id === randomAnime.id);
+//   // setIsAnime(!isDuplicate ? [...isAnime, randomAnime] : [...isAnime])
 
-  //   setIsAnime([...isAnime, randomAnime]);
-  // }
+//   setIsAnime([...isAnime, randomAnime]);
+// }
