@@ -1,4 +1,4 @@
-# Annoying One Piece Character - Scrimba
+# Annoying One Piece Characters - Scrimba
 Simple practice project using ReactJS, Vite & SwiperJS
 
 Live Website - https://theblaisecode.github.io/One-Piece/
