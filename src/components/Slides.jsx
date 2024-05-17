@@ -66,14 +66,3 @@ export default function Slides() {
     </div>
   );
 }
-
-// function surprise() {
-//   const randomAnime = isAnime[Math.floor(Math.random() * isAnime.length)];
-//   console.log(isAnime);
-//   console.log(randomAnime);
-
-//   // const isDuplicate = isAnime.some((item) => item.id === randomAnime.id);
-//   // setIsAnime(!isDuplicate ? [...isAnime, randomAnime] : [...isAnime])
-
-//   setIsAnime([...isAnime, randomAnime]);
-// }
