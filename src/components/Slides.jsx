@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -8,11 +8,10 @@ import berry from "../img/berri.png";
 import "../style.css";
 
 export default function Slides() {
-  const [allData, setAllData] = useState(annoyingData);
   const swiperRef = useRef(null);
 
   function surprise() {
-    const randomAnime = Math.floor(Math.random() * allData.length);
+    const randomAnime = Math.floor(Math.random() * annoyingData.length);
     swiperRef.current.swiper.slideTo(randomAnime);
   }
 
@@ -26,7 +25,7 @@ export default function Slides() {
         navigation={true}
         modules={[Navigation]}
         className="mySwiper">
-        {allData.map((item) => {
+        {annoyingData.map((item) => {
           const { id, img, name, affiliation, bounty, devilFruit, bio } = item;
           return (
             <SwiperSlide key={id}>
