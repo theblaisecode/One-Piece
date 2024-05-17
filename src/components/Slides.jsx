@@ -12,6 +12,7 @@ export default function Slides() {
 
   function surprise() {
     const randomAnime = Math.floor(Math.random() * annoyingData.length);
+    swiperRef.current.swiper.slideTo(randomAnime);
   }
 
   return (
